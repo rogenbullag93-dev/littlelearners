@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Little Learners — Kids Games</title>
+<style>
+:root{--ink:#26324b;--muted:#65718a;--pink:#ff7e9d;--yellow:#ffd45e;--blue:#69c8f2;--green:#72d6a0;--purple:#a994f5;--paper:#fffdf7}
+*{box-sizing:border-box}body{margin:0;font-family:"Trebuchet MS",Arial,sans-serif;color:var(--ink);background:linear-gradient(135deg,#fff4d7,#fce8f2 48%,#e6f7ff);min-height:100vh}
+header{padding:22px 5vw 12px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:12px;font-weight:900;font-size:clamp(1.3rem,3vw,2rem)}.logo{width:48px;height:48px;border-radius:16px;background:var(--yellow);display:grid;place-items:center;font-size:28px;box-shadow:0 5px 0 #eab94a}
+.score-pill{background:white;border:2px solid #f5e7c7;padding:10px 16px;border-radius:30px;font-weight:800;box-shadow:0 4px 0 #eadfc8}
+main{max-width:1100px;margin:auto;padding:18px 5vw 50px}
+.hero{text-align:center;padding:22px 12px 28px}.hero h1{font-size:clamp(2rem,6vw,3.7rem);margin:8px 0;color:#35415e}.hero p{font-size:1.08rem;color:var(--muted);margin:0}
+.games{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}
+.game-card{border:0;border-radius:25px;padding:22px;text-align:left;cursor:pointer;min-height:220px;box-shadow:0 8px 0 rgba(54,67,96,.12);transition:.18s transform,.18s box-shadow;color:var(--ink)}
+.game-card:hover{transform:translateY(-5px);box-shadow:0 13px 0 rgba(54,67,96,.10)}.game-card:active{transform:translateY(3px);box-shadow:0 3px 0 rgba(54,67,96,.12)}
+.game-card .emoji{font-size:54px;display:block;margin-bottom:14px}.game-card h2{margin:0 0 7px;font-size:1.35rem}.game-card p{margin:0;color:#4e5b73;line-height:1.4}
+.pink{background:#ffdce5}.yellow{background:#fff0b8}.blue{background:#d9f2ff}.green{background:#d9f8e6}.purple{background:#e8e0ff}
+.panel{display:none;background:white;border:3px solid #f2e9d8;border-radius:28px;padding:clamp(18px,4vw,32px);box-shadow:0 10px 0 rgba(54,67,96,.08);text-align:center}
+.panel.active{display:block}.panel h2{font-size:clamp(1.5rem,4vw,2.2rem);margin:5px 0 10px}.instruction{color:var(--muted);margin:0 0 22px}
+.back{border:0;background:#edf1f8;color:var(--ink);font-weight:800;padding:10px 16px;border-radius:20px;cursor:pointer;float:left}
+.action{border:0;background:var(--purple);color:#282344;font-weight:900;font-size:1rem;padding:12px 22px;border-radius:18px;cursor:pointer;margin:8px;box-shadow:0 4px 0 #8874d8}
+.action:active{transform:translateY(3px);box-shadow:0 1px 0 #8874d8}
+.feedback{min-height:32px;font-weight:900;font-size:1.15rem;margin:15px 0}
+.memory-grid{display:grid;grid-template-columns:repeat(4,minmax(55px,90px));justify-content:center;gap:10px;margin:20px auto}
+.memory-card{height:82px;border:0;border-radius:16px;background:#8bcff1;font-size:2rem;cursor:pointer;box-shadow:0 4px 0 #58acd4}
+.memory-card.revealed,.memory-card.matched{background:#fff0b8}.memory-card.matched{opacity:.65;cursor:default}
+.choices{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin:22px 0}
+.choice{border:3px solid #edf0f6;background:white;border-radius:18px;padding:15px 22px;font-size:1.3rem;font-weight:900;cursor:pointer;min-width:75px}
+.choice:hover{border-color:var(--purple);background:#f6f2ff}
+.big-question{font-size:clamp(2.8rem,10vw,5rem);font-weight:900;margin:20px}
+.color-word{font-size:clamp(2.5rem,9vw,4.5rem);font-weight:1000;margin:25px 0;letter-spacing:2px}
+.color-dot{width:70px;height:70px;border-radius:50%;display:inline-block;border:5px solid white;box-shadow:0 3px 10px #0002;vertical-align:middle}
+.letter{font-size:clamp(4rem,15vw,7rem);font-weight:1000;color:#9278e9;margin:8px}
+footer{text-align:center;color:#78839a;padding:12px;font-size:.9rem}
+@media(max-width:520px){header{padding-top:16px}.game-card{min-height:185px}.memory-grid{gap:7px}.memory-card{height:68px}.panel{padding:16px 10px}}
+</style>
+</head>
+<body>
+<header><div class="brand"><span class="logo">🧸</span> Little Learners</div><div class="score-pill">⭐ Stars: <span id="stars">0</span></div></header>
+<main>
+<section id="home">
+ <div class="hero"><h1>Let's Play & Learn! 🎉</h1><p>Pick a game, have fun, and earn stars as you learn.</p></div>
+ <div class="games">
+  <button class="game-card pink" onclick="openGame('memory')"><span class="emoji">🧠</span><h2>Memory Match</h2><p>Find the matching picture pairs and train your memory.</p></button>
+  <button class="game-card yellow" onclick="openGame('math')"><span class="emoji">🔢</span><h2>Number Fun</h2><p>Answer easy addition questions and practice counting.</p></button>
+  <button class="game-card blue" onclick="openGame('colors')"><span class="emoji">🎨</span><h2>Color Match</h2><p>Look at the color and choose its correct name.</p></button>
+  <button class="game-card green" onclick="openGame('letters')"><span class="emoji">🔤</span><h2>ABC Adventure</h2><p class="instruction">Which word begins with this letter?</p><div id="letterDisplay" class="letter">A</div><div id="letterChoices" class="choices"></div><div id="letterFeedback" class="feedback" aria-live="polite"></div><button class="action" onclick="newLetter()">Next Letter ➜</button></section>
+</main>
+<footer>Made for curious little learners 💛 · Play, learn, and be kind!</footer>
+<script>
+let stars=0;
+function earnStar(){stars++;document.getElementById('stars').textContent=stars}
+function goHome(){document.getElementById('home').style.display='block';document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'))}
+function openGame(id){document.getElementById('home').style.display='none';document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));document.getElementById(id).classList.add('active');if(id==='memory')startMemory();if(id==='math')newMath();if(id==='colors')newColor();if(id==='letters')newLetter()}
+const shuffle=a=>[...a].sort(()=>Math.random()-.5);
+let first=null,lock=false,matches=0;
+function startMemory(){first=null;lock=false;matches=0;let icons=shuffle(['🐶','🐱','🐸','🦊','🐼','🐵']);let cards=shuffle([...icons,...icons]);let grid=document.getElementById('memoryGrid');grid.innerHTML='';document.getElementById('memoryFeedback').textContent='Find all 6 pairs!';cards.forEach((emoji,i)=>{let b=document.createElement('button');b.className='memory-card';b.textContent='❔';b.setAttribute('aria-label','Hidden card');b.onclick=()=>flipCard(b,emoji);grid.appendChild(b)})}
+function flipCard(btn,emoji){if(lock||btn.classList.contains('revealed')||btn.classList.contains('matched'))return;btn.textContent=emoji;btn.classList.add('revealed');if(!first){first={btn,emoji};return}if(first.emoji===emoji){first.btn.classList.remove('revealed');btn.classList.remove('revealed');first.btn.classList.add('matched');btn.classList.add('matched');matches++;earnStar();document.getElementById('memoryFeedback').textContent='Great match! ⭐';first=null;if(matches===6)document.getElementById('memoryFeedback').textContent='🎉 You found every pair! Amazing!'}else{lock=true;let prev=first.btn;first=null;document.getElementById('memoryFeedback').textContent='Not a match. Try again!';setTimeout(()=>{prev.textContent='❔';btn.textContent='❔';prev.classList.remove('revealed');btn.classList.remove('revealed');lock=false},750)}}
+let mathAnswer=0,mathDone=false;
+function newMath(){let a=Math.floor(Math.random()*10)+1,b=Math.floor(Math.random()*10)+1;mathAnswer=a+b;mathDone=false;document.getElementById('mathQuestion').textContent=`${a} + ${b} = ?`;let opts=new Set([mathAnswer]);while(opts.size<4)opts.add(Math.max(1,mathAnswer+Math.floor(Math.random()*9)-4));document.getElementById('mathChoices').innerHTML='';shuffle([...opts]).forEach(n=>{let b=document.createElement('button');b.className='choice';b.textContent=n;b.onclick=()=>{if(mathDone)return;mathDone=true;if(n===mathAnswer){document.getElementById('mathFeedback').textContent='Correct! You are a star! 🌟';earnStar()}else document.getElementById('mathFeedback').textContent=`Good try! The answer is ${mathAnswer}.`;};document.getElementById('mathChoices').appendChild(b)});document.getElementById('mathFeedback').textContent=''}
+const colorSet=[['RED','#ef5350'],['BLUE','#42a5f5'],['YELLOW','#fdd835'],['GREEN','#43a66b'],['PURPLE','#9c70d8'],['ORANGE','#ff963d'],['PINK','#f48fb1']];
+let colorAnswer='',colorDone=false;
+function newColor(){let c=shuffle(colorSet)[0];colorAnswer=c[0];colorDone=false;document.getElementById('colorDisplay').innerHTML=`<span class="color-dot" style="background:${c[1]}"></span>`;document.getElementById('colorChoices').innerHTML='';shuffle(colorSet).slice(0,4).forEach(x=>{let b=document.createElement('button');b.className='choice';b.textContent=x[0];b.onclick=()=>{if(colorDone)return;colorDone=true;if(x[0]===colorAnswer){document.getElementById('colorFeedback').textContent='Yes! That is '+colorAnswer+'! 🎨';earnStar()}else document.getElementById('colorFeedback').textContent='Nice try! It is '+colorAnswer+'.'};document.getElementById('colorChoices').appendChild(b)});if(![...document.getElementById('colorChoices').children].some(b=>b.textContent===colorAnswer)){let b=document.createElement('button');b.className='choice';b.textContent=colorAnswer;b.onclick=()=>{if(colorDone)return;colorDone=true;document.getElementById('colorFeedback').textContent='Correct! 🎨';earnStar()};document.getElementById('colorChoices').appendChild(b)}document.getElementById('colorFeedback').textContent=''}
+const letterWords=[['A',['Apple','Ball','Cat']],['B',['Banana','Dog','Fish']],['C',['Cat','Apple','Sun']],['D',['Dog','Moon','Egg']],['E',['Elephant','Fish','Hat']],['F',['Fish','Lion','Kite']],['G',['Giraffe','Apple','Tree']],['H',['House','Orange','Dog']],['L',['Lion','Banana','Cup']],['M',['Moon','Fish','Apple']],['S',['Sun','Egg','Ball']],['T',['Tiger','Cat','Umbrella']]];
+let letterAnswer='',letterDone=false;
+function newLetter(){let item=shuffle(letterWords)[0];letterAnswer=item[1][0];letterDone=false;document.getElementById('letterDisplay').textContent=item[0];document.getElementById('letterChoices').innerHTML='';shuffle(item[1]).forEach(word=>{let b=document.createElement('button');b.className='choice';b.textContent=word;b.onclick=()=>{if(letterDone)return;letterDone=true;if(word===letterAnswer){document.getElementById('letterFeedback').textContent='Wonderful! '+word+' starts with '+item[0]+'! 🔤';earnStar()}else document.getElementById('letterFeedback').textContent='Good try! The answer is '+letterAnswer+'.'};document.getElementById('letterChoices').appendChild(b)});document.getElementById('letterFeedback').textContent=''}
+</script>
+</body>
+</html>
